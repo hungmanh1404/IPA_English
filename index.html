@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive English Phonemic Chart - Learn IPA Pronunciation</title>
+    <meta name="description"
+        content="Interactive phonemic chart for learning English pronunciation with clickable IPA symbols and American English audio examples.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Phonemic Chart</h1>
+            <p class="subtitle">Click on any phoneme to hear its pronunciation</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Pronunciation Guide Panel -->
+            <div class="pronunciation-guide">
+                <div class="guide-header">
+                    <h2>Pronunciation Guide</h2>
+                    <p class="guide-instruction">Click a phoneme to see how to pronounce it</p>
+                </div>
+
+                <div class="guide-content" id="guideContent">
+                    <div class="guide-placeholder">
+                        <svg width="120" height="120" viewBox="0 0 120 120" class="placeholder-icon">
+                            <circle cx="60" cy="60" r="50" fill="none" stroke="#d0c4b8" stroke-width="2" />
+                            <path d="M 40 50 Q 60 70 80 50" fill="none" stroke="#d0c4b8" stroke-width="2"
+                                stroke-linecap="round" />
+                            <circle cx="45" cy="45" r="3" fill="#d0c4b8" />
+                            <circle cx="75" cy="45" r="3" fill="#d0c4b8" />
+                        </svg>
+                        <p>Select a phoneme to see<br>pronunciation details</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phonemic Chart -->
+            <div class="chart-wrapper">
+                <!-- Vowels Section -->
+                <div class="section-label vowels-label">Vowels</div>
+
+                <div class="vowels-grid">
+                    <!-- Row 1: Monophthongs -->
+                    <div class="phoneme-cell monophthong" data-sound="ee">
+                        <div class="ipa">iː</div>
+                        <div class="examples">
+                            <span>sheep</span>
+                            <span>eagle</span>
+                            <span>field</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell monophthong" data-sound="ih">
+                        <div class="ipa">ɪ</div>
+                        <div class="examples">
+                            <span>ship</span>
+                            <span>busy</span>
+                            <span>started</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell monophthong" data-sound="uh">
+                        <div class="ipa">ʊ</div>
+                        <div class="examples">
+                            <span>good</span>
+                            <span>put</span>
+                            <span>should</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell monophthong" data-sound="oo">
+                        <div class="ipa">uː</div>
+                        <div class="examples">
+                            <span>moon</span>
+                            <span>grew</span>
+                            <span>through</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell monophthong" data-sound="ear">
+                        <div class="ipa">ɪə</div>
+                        <div class="examples">
+                            <span>ear</span>
+                            <span>here</span>
+                            <span>career</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell monophthong" data-sound="air">
+                        <div class="ipa">eɪ</div>
+                        <div class="examples">
+                            <span>train</span>
+                            <span>say</span>
+                            <span>plane</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Short vowels -->
+                    <div class="phoneme-cell short-vowel" data-sound="eh">
+                        <div class="ipa">e</div>
+                        <div class="examples">
+                            <span>bed</span>
+                            <span>dead</span>
+                            <span>said</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="uh2">
+                        <div class="ipa">ə</div>
+                        <div class="examples">
+                            <span>about</span>
+                            <span>police</span>
+                            <span>the</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="er">
+                        <div class="ipa">ɜː</div>
+                        <div class="examples">
+                            <span>bird</span>
+                            <span>hurt</span>
+                            <span>work</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="or">
+                        <div class="ipa">ɔː</div>
+                        <div class="examples">
+                            <span>door</span>
+                            <span>walk</span>
+                            <span>saw</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="oor">
+                        <div class="ipa">ʊə</div>
+                        <div class="examples">
+                            <span>your</span>
+                            <span>sure</span>
+                            <span>tourist</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="oy">
+                        <div class="ipa">ɔɪ</div>
+                        <div class="examples">
+                            <span>boy</span>
+                            <span>point</span>
+                            <span>oil</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell short-vowel" data-sound="oh">
+                        <div class="ipa">əʊ</div>
+                        <div class="examples">
+                            <span>coat</span>
+                            <span>low</span>
+                            <span>note</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Diphthongs -->
+                    <div class="phoneme-cell diphthong" data-sound="ae">
+                        <div class="ipa">æ</div>
+                        <div class="examples">
+                            <span>apple</span>
+                            <span>cat</span>
+                            <span>mat</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="uh3">
+                        <div class="ipa">ʌ</div>
+                        <div class="examples">
+                            <span>up</span>
+                            <span>money</span>
+                            <span>cut</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="ar">
+                        <div class="ipa">ɑː</div>
+                        <div class="examples">
+                            <span>car</span>
+                            <span>bath</span>
+                            <span>safari</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="o">
+                        <div class="ipa">ɒ</div>
+                        <div class="examples">
+                            <span>not</span>
+                            <span>what</span>
+                            <span>because</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="air2">
+                        <div class="ipa">eə</div>
+                        <div class="examples">
+                            <span>hair</span>
+                            <span>careful</span>
+                            <span>there</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="eye">
+                        <div class="ipa">aɪ</div>
+                        <div class="examples">
+                            <span>by</span>
+                            <span>high</span>
+                            <span>fine</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="ow">
+                        <div class="ipa">aʊ</div>
+                        <div class="examples">
+                            <span>now</span>
+                            <span>our</span>
+                            <span>house</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consonants Section -->
+                <div class="section-label consonants-label">Consonants</div>
+
+                <div class="consonants-grid">
+                    <!-- Row 1: Plosives and Affricates -->
+                    <div class="phoneme-cell voiceless" data-sound="p">
+                        <div class="ipa">p</div>
+                        <div class="examples">
+                            <span>pen</span>
+                            <span>hopping</span>
+                            <span>jump</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="b">
+                        <div class="ipa">b</div>
+                        <div class="examples">
+                            <span>ball</span>
+                            <span>hobby</span>
+                            <span>herb</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiceless" data-sound="t">
+                        <div class="ipa">t</div>
+                        <div class="examples">
+                            <span>table</span>
+                            <span>little</span>
+                            <span>watched</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="d">
+                        <div class="ipa">d</div>
+                        <div class="examples">
+                            <span>dog</span>
+                            <span>added</span>
+                            <span>played</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="ch">
+                        <div class="ipa">tʃ</div>
+                        <div class="examples">
+                            <span>chips</span>
+                            <span>itch</span>
+                            <span>picture</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="j">
+                        <div class="ipa">dʒ</div>
+                        <div class="examples">
+                            <span>jam</span>
+                            <span>danger</span>
+                            <span>fudge</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiceless" data-sound="k">
+                        <div class="ipa">k</div>
+                        <div class="examples">
+                            <span>key</span>
+                            <span>car</span>
+                            <span>luck</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="g">
+                        <div class="ipa">g</div>
+                        <div class="examples">
+                            <span>green</span>
+                            <span>hug</span>
+                            <span>league</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Fricatives -->
+                    <div class="phoneme-cell voiceless" data-sound="f">
+                        <div class="ipa">f</div>
+                        <div class="examples">
+                            <span>fire</span>
+                            <span>laugh</span>
+                            <span>phone</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="v">
+                        <div class="ipa">v</div>
+                        <div class="examples">
+                            <span>video</span>
+                            <span>move</span>
+                            <span>of</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiceless" data-sound="th">
+                        <div class="ipa">θ</div>
+                        <div class="examples">
+                            <span>thick</span>
+                            <span>healthy</span>
+                            <span>teeth</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="dh">
+                        <div class="ipa">ð</div>
+                        <div class="examples">
+                            <span>mother</span>
+                            <span>this</span>
+                            <span>with</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiceless" data-sound="s">
+                        <div class="ipa">s</div>
+                        <div class="examples">
+                            <span>see</span>
+                            <span>city</span>
+                            <span>notice</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="z">
+                        <div class="ipa">z</div>
+                        <div class="examples">
+                            <span>zebra</span>
+                            <span>cosy</span>
+                            <span>has</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiceless" data-sound="sh">
+                        <div class="ipa">ʃ</div>
+                        <div class="examples">
+                            <span>shop</span>
+                            <span>nation</span>
+                            <span>special</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="zh">
+                        <div class="ipa">ʒ</div>
+                        <div class="examples">
+                            <span>television</span>
+                            <span>visual</span>
+                            <span>leisure</span>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Nasals and Approximants -->
+                    <div class="phoneme-cell voiced" data-sound="m">
+                        <div class="ipa">m</div>
+                        <div class="examples">
+                            <span>man</span>
+                            <span>tummy</span>
+                            <span>lamb</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="n">
+                        <div class="ipa">n</div>
+                        <div class="examples">
+                            <span>no</span>
+                            <span>funny</span>
+                            <span>knife</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="ng">
+                        <div class="ipa">ŋ</div>
+                        <div class="examples">
+                            <span>sing</span>
+                            <span>uncle</span>
+                            <span>angry</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="y">
+                        <div class="ipa">j</div>
+                        <div class="examples">
+                            <span>yes</span>
+                            <span>onion</span>
+                            <span>view</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="l">
+                        <div class="ipa">l</div>
+                        <div class="examples">
+                            <span>light</span>
+                            <span>smelly</span>
+                            <span>feel</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="r">
+                        <div class="ipa">r</div>
+                        <div class="examples">
+                            <span>right</span>
+                            <span>berry</span>
+                            <span>wrong</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell voiced" data-sound="w">
+                        <div class="ipa">w</div>
+                        <div class="examples">
+                            <span>win</span>
+                            <span>where</span>
+                            <span>one</span>
+                        </div>
+                    </div>
+
+                    <div class="phoneme-cell diphthong" data-sound="h">
+                        <div class="ipa">h</div>
+                        <div class="examples">
+                            <span>house</span>
+                            <span>hungry</span>
+                            <span>who</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color short-vowel"></div>
+                        <span>short</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color monophthong"></div>
+                        <span>long</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color diphthong"></div>
+                        <span>diphthongs</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color voiced"></div>
+                        <span>voiced</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color voiceless"></div>
+                        <span>unvoiced</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>The 44 phonemes of Standard American English with examples of common spellings.</p>
+    </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
