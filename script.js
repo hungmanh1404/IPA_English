@@ -1003,17 +1003,208 @@ function initializePhonemes() {
     });
 }
 
+// Add speaker buttons to phoneme cells for isolated phoneme pronunciation
+function addPhonemeSpeakers() {
+    const phonemeCells = document.querySelectorAll('.phoneme-cell');
+
+    phonemeCells.forEach(cell => {
+        const soundKey = cell.getAttribute('data-sound');
+        const ipaSymbol = cell.querySelector('.ipa').textContent;
+
+        // Create speaker button
+        const speakerBtn = document.createElement('span');
+        speakerBtn.className = 'phoneme-speaker';
+        speakerBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+            </svg>
+        `;
+        speakerBtn.setAttribute('title', `Pronounce phoneme ${ipaSymbol}`);
+        speakerBtn.setAttribute('role', 'button');
+        speakerBtn.setAttribute('tabindex', '0');
+        speakerBtn.setAttribute('aria-label', `Pronounce phoneme ${ipaSymbol}`);
+
+        // Click handler for isolated phoneme sound
+        speakerBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent triggering cell click
+
+            // Visual feedback
+            speakerBtn.style.transform = 'scale(1.4)';
+            setTimeout(() => {
+                speakerBtn.style.transform = '';
+            }, 200);
+
+            // Pronounce just the phoneme sound
+            pronouncePhoneme(ipaSymbol);
+        });
+
+        // Keyboard support
+        speakerBtn.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                e.stopPropagation();
+                speakerBtn.click();
+            }
+        });
+
+        // Add to cell
+        cell.appendChild(speakerBtn);
+    });
+}
+
+// Pronounce isolated phoneme sound
+function pronouncePhoneme(ipaSymbol) {
+    if (synth.speaking) {
+        synth.cancel();
+    }
+
+    // Map IPA symbols to pronounceable sounds
+    const phonemeMap = {
+        // Vowels
+        'iː': 'eee',
+        'ɪ': 'ih',
+        'ʊ': 'uh',
+        'uː': 'ooo',
+        'ɪə': 'ear',
+        'eɪ': 'ay',
+        'e': 'eh',
+        'ə': 'uh',
+        'ɜː': 'er',
+        'ɔː': 'aw',
+        'ʊə': 'oor',
+        'ɔɪ': 'oy',
+        'əʊ': 'oh',
+        'æ': 'ah',
+        'ʌ': 'uh',
+        'ɑː': 'aah',
+        'ɒ': 'oh',
+        'eə': 'air',
+        'aɪ': 'eye',
+        'aʊ': 'ow',
+        // Consonants
+        'p': 'puh',
+        'b': 'buh',
+        't': 'tuh',
+        'd': 'duh',
+        'tʃ': 'ch',
+        'dʒ': 'j',
+        'k': 'kuh',
+        'g': 'guh',
+        'f': 'fff',
+        'v': 'vvv',
+        'θ': 'th',
+        'ð': 'th',
+        's': 'sss',
+        'z': 'zzz',
+        'ʃ': 'sh',
+        'ʒ': 'zh',
+        'm': 'mmm',
+        'n': 'nnn',
+        'ŋ': 'ng',
+        'j': 'yuh',
+        'l': 'lll',
+        'r': 'rrr',
+        'w': 'wuh',
+        'h': 'huh'
+    };
+
+    const sound = phonemeMap[ipaSymbol] || ipaSymbol;
+
+    const utterance = new SpeechSynthesisUtterance(sound);
+    utterance.voice = getAmericanVoice();
+    utterance.lang = 'en-US';
+    utterance.rate = 0.6; // Slower for isolated sounds
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+
+    synth.speak(utterance);
+}
+
+
+// Enhance example words with IPA transcriptions and speaker icons
+function enhanceExampleWords() {
+    const exampleContainers = document.querySelectorAll('.examples');
+
+    exampleContainers.forEach(container => {
+        const spans = container.querySelectorAll('span');
+
+        spans.forEach(span => {
+            const word = span.textContent.trim();
+            const ipa = getWordTranscription(word);
+
+            // Create new structure
+            const wordDiv = document.createElement('div');
+            wordDiv.className = 'example-word';
+
+            // Word text
+            const wordText = document.createElement('span');
+            wordText.className = 'word-text';
+            wordText.textContent = word;
+
+            // IPA transcription
+            const wordIpa = document.createElement('span');
+            wordIpa.className = 'word-ipa';
+            wordIpa.textContent = ipa;
+
+            // Speaker icon
+            const speakerIcon = document.createElement('span');
+            speakerIcon.className = 'speaker-icon';
+            speakerIcon.innerHTML = `
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            `;
+            speakerIcon.setAttribute('title', `Pronounce "${word}"`);
+            speakerIcon.setAttribute('role', 'button');
+            speakerIcon.setAttribute('tabindex', '0');
+            speakerIcon.setAttribute('aria-label', `Pronounce ${word}`);
+
+            // Add click handler
+            speakerIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                speakWord(word);
+
+                // Visual feedback
+                speakerIcon.style.transform = 'scale(1.3)';
+                setTimeout(() => {
+                    speakerIcon.style.transform = '';
+                }, 200);
+            });
+
+            // Keyboard support
+            speakerIcon.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    speakerIcon.click();
+                }
+            });
+
+            // Assemble
+            wordDiv.appendChild(wordText);
+            wordDiv.appendChild(wordIpa);
+            wordDiv.appendChild(speakerIcon);
+
+            // Replace original span
+            span.replaceWith(wordDiv);
+        });
+    });
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(() => {
         getAmericanVoice();
         initializePhonemes();
+        enhanceExampleWords(); // Add IPA and speaker icons
+        addPhonemeSpeakers(); // Add phoneme speaker buttons
     }, 100);
 
     if (!('speechSynthesis' in window)) {
         alert('Sorry, your browser does not support text-to-speech. Please use a modern browser like Chrome, Firefox, or Safari.');
     }
 });
+
 
 // Handle page visibility
 document.addEventListener('visibilitychange', function () {

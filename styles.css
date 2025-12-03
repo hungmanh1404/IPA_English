@@ -269,6 +269,38 @@ h1 {
     overflow: hidden;
 }
 
+.phoneme-speaker {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.phoneme-speaker:hover {
+    opacity: 1;
+    transform: scale(1.2);
+    background: rgba(255, 255, 255, 1);
+}
+
+.phoneme-speaker:active {
+    transform: scale(0.9);
+}
+
+.phoneme-speaker svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--text-dark);
+}
+
+
 .phoneme-cell::before {
     content: '';
     position: absolute;
@@ -346,15 +378,56 @@ h1 {
 .examples {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
+    gap: 0.3rem;
     font-size: 0.75rem;
     color: var(--text-medium);
     line-height: 1.3;
 }
 
-.examples span {
-    font-weight: 500;
+.example-word {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.15rem 0;
 }
+
+.word-text {
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.word-ipa {
+    font-size: 0.7rem;
+    color: #8b7355;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.speaker-icon {
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.speaker-icon:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.speaker-icon:active {
+    transform: scale(0.95);
+}
+
+.speaker-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--text-dark);
+}
+
 
 /* Legend */
 .legend {
