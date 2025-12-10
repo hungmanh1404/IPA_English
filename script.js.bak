@@ -968,21 +968,7 @@ function updatePronunciationGuide(soundKey) {
                 <div class="example-word">"${data.text}"</div>
             </div>
             
-            ${data.videoTimestamp ? `
-            <div class="video-section">
-                <h3>Video Tutorial</h3>
-                <div class="video-player-wrapper">
-                    <div id="youtubePlayerContainer"></div>
-                </div>
-                <button class="play-video-btn" onclick="playVideoAtTimestamp(${data.videoTimestamp})">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 5v14l11-7z"/>
-                    </svg>
-                    Play Video Tutorial
-                </button>
-            </div>
-            ` : ''}
-
+            <div class="mouth-diagram">
                 <h3>Mouth Position</h3>
                 ${createMouthDiagram(data.diagram)}
             </div>
@@ -1024,11 +1010,6 @@ function updatePronunciationGuide(soundKey) {
     `;
 
     guideContent.innerHTML = html;
-    
-    // Initialize YouTube player after DOM update
-    if (data.videoTimestamp && typeof initializeYouTubePlayer === 'function') {
-        setTimeout(() => initializeYouTubePlayer(), 100);
-    }
 }
 
 // Initialize phonemes
